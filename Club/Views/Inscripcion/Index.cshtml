@@ -1,0 +1,145 @@
+﻿@model Club.Models.VM_ACTIVIDAD_INSCRIPCION_2
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("FECHA INICIO")
+        </th>
+        <th>
+            @Html.DisplayName("FECHA FIN")
+        </th>
+        <th>
+            @Html.DisplayName("Descripcion")
+        </th>
+        <th>
+            @Html.DisplayName("PROFESOR")
+        </th>
+
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.lActividad)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FECHA_INICIO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FECHA_FIN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ACTIVIDAD_DESCRIPCION)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NOMBRE_COMPLETO)
+            </td>
+
+
+            <td>
+                @Html.ActionLink("Anotarse", "Edit", new { id = item.ID_ACTIVIDAD })|
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#AA_@(item.ID_ACTIVIDAD)" aria-expanded="true" aria-controls="#AA_@(item.ID_ACTIVIDAD)">
+                    Horarios
+                </button>
+
+
+            </td>
+        </tr>
+
+        foreach (var horario in item.lHorario)
+        {
+            <tr id="AA_@(item.ID_ACTIVIDAD)" class="accordion-body collapse">
+                <td></td>
+                <td>
+                    @Html.Label(horario.DIA)
+                </td>
+                <td>
+                    @Html.Label(horario.HORA_INICIO.ToString("hh:ss")) a
+                    @Html.Label(horario.HORA_FIN.ToString("hh:ss"))
+                </td>
+                <td>
+                    @Html.Label(horario.nombreLocacion)
+                </td>
+            </tr>
+        }
+    }
+
+  
+    </table>
+<h2>Inscripto</h2>
+<table class="table">
+        <tr>
+            <th>
+                @Html.DisplayName("FECHA INICIO")
+            </th>
+            <th>
+                @Html.DisplayName("FECHA FIN")
+            </th>
+            <th>
+                @Html.DisplayName("ESTADO")
+            </th>
+            <th>
+                @Html.DisplayName("PROFESOR")
+            </th>
+
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.lIncripto)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FECHA_INICIO)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FECHA_FIN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ACTIVIDAD_DESCRIPCION)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NOMBRE_COMPLETO)
+                </td>
+
+
+                <td>
+                    @Html.ActionLink("Baja", "Baja", new { id = item.ID_ACTIVIDAD })|
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#bb_@(item.ID_ACTIVIDAD)" aria-expanded="true" aria-controls="#bb_@(item.ID_ACTIVIDAD)">
+                        Horarios
+                    </button>
+
+
+                </td>
+            </tr>
+
+            foreach (var horario in item.lHorario)
+            {
+                <tr id="bb_@(item.ID_ACTIVIDAD)" class="accordion-body collapse">
+                   
+                    <td>
+                        @Html.Label(horario.DIA)
+                    </td>
+                    <td>
+                        @Html.Label(horario.HORA_INICIO.ToString("hh:ss")) a
+                        @Html.Label(horario.HORA_FIN.ToString("hh:ss"))
+                    </td>
+                    <td>
+                        @Html.Label(horario.nombreLocacion)
+                    </td>
+                </tr>
+            }
+        }
+
+
+
+
+
+    </table>
